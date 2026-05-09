@@ -1,7 +1,8 @@
-<<<<<<< HEAD
 # viso_Mermaid
 一个viso插件，使用Mermaid代码一键生成流程图！我再也不想画了！
-=======
+
+用claude修改了原作者的代码，适配更多mermaid的语法，修改了连接线样式
+====================
 
 这是一个基于 **VSTO + Microsoft Visio Interop** 的 Visio 加载项项目，用来把 Mermaid 流程图代码转换成 Visio 中的流程图节点和连接线。
 
@@ -341,4 +342,3 @@ VisioAddIn1/
 - 如果你是第一次接手这个项目，建议先阅读：
   - [docs/architecture-overview.md](/E:/项目/Viso流程图生成插件/VisioFlowchartExtractor/VisioAddIn1/docs/architecture-overview.md)
   - [docs/manual-regression-samples.md](/E:/项目/Viso流程图生成插件/VisioFlowchartExtractor/VisioAddIn1/docs/manual-regression-samples.md)
->>>>>>> d4ef9da (version 1.0.0)
