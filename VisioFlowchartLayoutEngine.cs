@@ -42,7 +42,8 @@ namespace VisioAddIn1
         {
             try
             {
-                page.PageSheet.CellsU["RouteStyle"].Formula = "5";
+                // RouteStyle = 1 表示直角路由 (visRouteRightAngle)
+                page.PageSheet.CellsU["RouteStyle"].Formula = "1";
                 page.PageSheet.CellsU["PlaceStyle"].Formula = "1";
                 page.PageSheet.CellsU["PlaceDepth"].Formula = "1";
                 page.PageSheet.CellsU["AvenueSizeX"].Formula = "1.5 in";

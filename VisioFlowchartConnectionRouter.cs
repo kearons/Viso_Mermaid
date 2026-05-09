@@ -23,8 +23,8 @@ namespace VisioAddIn1
         private const string ConnectorTextSizeFormula = "11 pt";
         private const string NoArrowFormula = "0";
         private const string NoFillFormula = "0";
-        private const string VerticalRouteStyle = "22";
-        private const string HorizontalRouteStyle = "21";
+        // 直角路由样式 = 1 (Visio.VisRouteStyle.visRouteRightAngle)
+        private const string RightAngleRouteStyle = "1";
 
         private readonly Visio.Application _application;
 
@@ -115,6 +115,7 @@ namespace VisioAddIn1
                     shapeMap[connection.FromId],
                     shapeMap[connection.ToId],
                     connection.Label,
+                    connection.ArrowType,
                     assignment.startSide,
                     assignment.endSide);
             }
@@ -125,6 +126,7 @@ namespace VisioAddIn1
             Visio.Shape fromShape,
             Visio.Shape toShape,
             string label,
+            string arrowType,
             string startSide,
             string endSide)
         {
@@ -144,7 +146,9 @@ namespace VisioAddIn1
                     connector.Text = label;
                 }
 
-                SetConnectorStyle(connector);
+                // 根据 ArrowType 判断是否需要箭头
+                bool hasArrow = !string.IsNullOrEmpty(arrowType) && arrowType.Contains(">");
+                SetConnectorStyle(connector, hasArrow);
             }
             catch (Exception ex)
             {
@@ -182,7 +186,7 @@ namespace VisioAddIn1
                     connector.CellsU["TxtLocPinY"].FormulaU = "TxtHeight*0.5";
                 }
 
-                SetConnectorStyle(connector);
+                SetConnectorStyle(connector, hasArrow: false);
                 connector.CellsU["BeginArrow"].Formula = NoArrowFormula;
                 connector.CellsU["LineColor"].FormulaForceU = BlackThemeFormula;
                 connector.CellsU["Char.Color"].FormulaForceU = BlackThemeFormula;
@@ -194,7 +198,7 @@ namespace VisioAddIn1
             }
         }
 
-        private void SetConnectorStyle(Visio.Shape connector)
+        private void SetConnectorStyle(Visio.Shape connector, bool hasArrow)
         {
             try
             {
@@ -203,8 +207,18 @@ namespace VisioAddIn1
                 connector.CellsU["LineWeight"].Formula = LineWeightFormula;
                 connector.CellsU["ConLineRouteExt"].Formula = ConnectorRouteExtensionFormula;
                 connector.CellsU["Rounding"].Formula = NoRoundingFormula;
-                connector.CellsU["EndArrow"].Formula = EndArrowFormula;
-                connector.CellsU["EndArrowSize"].Formula = EndArrowSizeFormula;
+
+                // 根据参数设置箭头
+                if (hasArrow)
+                {
+                    connector.CellsU["EndArrow"].Formula = EndArrowFormula;
+                    connector.CellsU["EndArrowSize"].Formula = EndArrowSizeFormula;
+                }
+                else
+                {
+                    connector.CellsU["EndArrow"].Formula = NoArrowFormula;
+                }
+
                 connector.CellsU["Char.Color"].FormulaForceU = BlackThemeFormula;
                 connector.CellsU["Char.Style"].Formula = "0";
                 connector.CellsU["Char.Size"].Formula = ConnectorTextSizeFormula;
@@ -217,17 +231,8 @@ namespace VisioAddIn1
 
         private string GetConnectorRouteStyle(Visio.Shape fromShape, Visio.Shape toShape)
         {
-            try
-            {
-                double deltaX = Math.Abs(fromShape.CellsU["PinX"].ResultIU - toShape.CellsU["PinX"].ResultIU);
-                double deltaY = Math.Abs(fromShape.CellsU["PinY"].ResultIU - toShape.CellsU["PinY"].ResultIU);
-                return deltaY >= deltaX ? VerticalRouteStyle : HorizontalRouteStyle;
-            }
-            catch (Exception ex)
-            {
-                InternalLog.Info($"计算连接线路由样式失败，改用默认垂直路由: {ex.Message}");
-                return VerticalRouteStyle;
-            }
+            // 使用直角路由样式
+            return RightAngleRouteStyle;
         }
 
         private Dictionary<MermaidParser.Connection, (string startSide, string endSide)> AssignConnectionSides(

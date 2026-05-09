@@ -33,7 +33,7 @@ namespace VisioAddIn1
                     var generator = new VisioFlowchartGenerator(visioApp);
                     generator.GenerateFlowchart(flowchartData);
 
-                    UserNotificationService.ShowSuccess("流程图已成功生成！");
+                    //UserNotificationService.ShowSuccess("流程图已成功生成！");
                 }
             }
             catch (Exception ex)

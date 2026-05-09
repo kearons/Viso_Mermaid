@@ -1,0 +1,13 @@
+E:\workspace\projects\c#\Viso_Mermaid\bin\Release\VisioAddIn1.dll
+E:\workspace\projects\c#\Viso_Mermaid\bin\Release\VisioAddIn1.pdb
+E:\workspace\projects\c#\Viso_Mermaid\bin\Release\VisioAddIn1.dll.manifest
+E:\workspace\projects\c#\Viso_Mermaid\bin\Release\VisioAddIn1.vsto
+E:\workspace\projects\c#\Viso_Mermaid\bin\Release\Microsoft.Office.Tools.Common.v4.0.Utilities.dll
+E:\workspace\projects\c#\Viso_Mermaid\obj\Release\VisioAddIn1.csproj.AssemblyReference.cache
+E:\workspace\projects\c#\Viso_Mermaid\obj\Release\VisioAddIn1.MermaidForm.resources
+E:\workspace\projects\c#\Viso_Mermaid\obj\Release\VisioAddIn1.Properties.Resources.resources
+E:\workspace\projects\c#\Viso_Mermaid\obj\Release\VisioAddIn1.csproj.GenerateResource.cache
+E:\workspace\projects\c#\Viso_Mermaid\obj\Release\VisioAddIn1.csproj.CoreCompileInputs.cache
+E:\workspace\projects\c#\Viso_Mermaid\obj\Release\VisioAdd.A12252C6.Up2Date
+E:\workspace\projects\c#\Viso_Mermaid\obj\Release\VisioAddIn1.dll
+E:\workspace\projects\c#\Viso_Mermaid\obj\Release\VisioAddIn1.pdb
